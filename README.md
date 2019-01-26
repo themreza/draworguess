@@ -1,5 +1,5 @@
 # Draw or Guess
-Draw or Guess is a fun cross-platform mobile game written with React Native.
+Draw or Guess is a fun Android mobile game written with React Native.
 The collected data could be used to study the visual perception of images by the human brain.
 
 ## Game Modes
