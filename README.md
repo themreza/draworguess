@@ -15,6 +15,9 @@ The collected data could be used to study the visual perception of images by the
   - Once your submission is done, you will be shown the original image that the drawing is based on.
   - You have to rate how good the user drew the image.
 
+## Demo:
+![](demo.gif)
+
 ## Citation
 If you decide to use this app in your research project, make sure to cite it:
 
