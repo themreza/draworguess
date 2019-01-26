@@ -16,7 +16,7 @@ The collected data could be used to study the visual perception of images by the
   - You have to rate how good the user drew the image.
 
 ## Demo:
-![](demo.gif)
+<img src="demo.gif" height="600">
 
 ## Citation
 If you decide to use this app in your research project, make sure to cite it:
