@@ -18,4 +18,4 @@ The collected data could be used to study the visual perception of images by the
 ## Citation
 If you decide to use this app in your research project, make sure to cite it:
 
-*`Tomaraei, Mohammad (2019). Draw or Guess [Mobile App]. https://github.com/themreza/draworguess`*
+*`Tomaraei, Mohammad (2019). Draw or Guess [Mobile App]. https://github.com/themreza/DrawOrGuess`*
