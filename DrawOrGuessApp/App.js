@@ -10,6 +10,9 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
+import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
+
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -22,9 +25,13 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <SketchCanvas
+            style={{ flex: 1 }}
+            strokeColor={'black'}
+            strokeWidth={4}
+          />
+        </View>
       </View>
     );
   }
