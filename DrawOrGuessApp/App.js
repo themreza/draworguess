@@ -14,13 +14,9 @@ import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
 
 console.disableYellowBox = true;
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-        
+var originalimageBase64 = "";
+var drawingimageBase64 = "";
+
 type Props = {};
 export default class App extends Component<Props> {
   
@@ -34,9 +30,25 @@ export default class App extends Component<Props> {
       showDrawNow: false,
     };
   }
-
+  
+  getBase64Image(url, callback){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            callback(reader.result.replace("data:application/octet-stream;base64,", ""));
+        };
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+  
   componentDidMount(){
-    // Start counting when the page is loaded
+    this.getBase64Image('http://lorempixel.com/500/500'+'?random_number=' +new Date().getTime(), (myBase64) => {
+      originalimageBase64 = myBase64;
+      // Start counting when the page is loaded
       this.timeoutHandle = setTimeout(()=>{
         this.setState({
               showReadySetGo: false,
@@ -57,13 +69,26 @@ export default class App extends Component<Props> {
       }, 8000);
       this.timeoutHandle = setTimeout(()=>{
         this.canvas.getBase64('png', false, true, true, true, (err, result) => {
-          console.log(result)
-        })
+          drawingimageBase64 = result;
+          console.log(originalimageBase64, drawingimageBase64);
+          fetch('http://192.168.0.144:3000/savedrawing', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              originalImage: originalimageBase64,
+              drawingImage: drawingimageBase64,
+            }),
+          });
+        });
         this.setState({
               showCanvas: false,
               showTimesUp: true
           });
       }, 18000);
+    });
   }
   
   componentWillUnmount(){
@@ -76,7 +101,7 @@ export default class App extends Component<Props> {
                 <Image
                   resizeMode="contain"
                   style={styles.originalimage}
-                  source={{uri: 'http://lorempixel.com/500/500'+'?random_number=' +new Date().getTime()}}
+                  source={{uri: 'data:image/jpeg;base64,'+originalimageBase64}}
                 />
             );
         } else {
@@ -99,9 +124,9 @@ export default class App extends Component<Props> {
                 </View>
                 <View style={{position: 'absolute', left: 0}}>
                     <Button title={' Save '} onPress={() => {
-                        console.log(this.canvas.getPaths());
+                        //console.log(this.canvas.getPaths());
                         this.canvas.getBase64('png', false, true, true, true, (err, result) => {
-                            console.log(result)
+                            drawingimageBase64 = result;
                         })
                     }}/>
                 </View>

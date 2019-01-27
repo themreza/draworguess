@@ -1,0 +1,17 @@
+{
+  "name": "draworguess-server",
+  "version": "1.0.0",
+  "description": "Draw or Guess Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Mohammad Tomaraei",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lowdb": "^1.0.0"
+  }
+}
