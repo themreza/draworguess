@@ -16,9 +16,9 @@ const drawingsdirectory = './drawings';
   
   app.post("/savedrawing", function(req,res){
     if(req.body.originalImage && req.body.drawingImage){
-      db.get('drawings')
-        .push({originalImage: req.body.originalImage, drawingImage: req.body.drawingImage})
-        .write() 
+      //db.get('drawings')
+        //.push({originalImage: req.body.originalImage, drawingImage: req.body.drawingImage})
+        //.write() 
       var current_timestamp = new Date().getTime();
       fs.mkdirSync(drawingsdirectory + '/' + current_timestamp)
       fs.writeFile(drawingsdirectory + '/' + current_timestamp + '/drawing.png', req.body.drawingImage, 'base64', function(err) {
