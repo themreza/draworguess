@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Draw or Guess App
+ * https://github.com/themreza/DrawOrGuess
  *
  * @format
  * @flow
@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, Button} from 'react-native';
 
 import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
 
@@ -37,7 +37,6 @@ export default class App extends Component<Props> {
 
   componentDidMount(){
     // Start counting when the page is loaded
-    console.log("Hello!");
       this.timeoutHandle = setTimeout(()=>{
         this.setState({
               showReadySetGo: false,
@@ -49,19 +48,22 @@ export default class App extends Component<Props> {
               showImage: false,
               showDrawNow: true
           });
-      }, 5500);
+      }, 5000);
       this.timeoutHandle = setTimeout(()=>{
         this.setState({
               showDrawNow: false,
               showCanvas: true
           });
-      }, 7000);
+      }, 8000);
       this.timeoutHandle = setTimeout(()=>{
+        this.canvas.getBase64('png', false, true, true, true, (err, result) => {
+          console.log(result)
+        })
         this.setState({
               showCanvas: false,
               showTimesUp: true
           });
-      }, 24000);
+      }, 18000);
   }
   
   componentWillUnmount(){
@@ -72,7 +74,8 @@ export default class App extends Component<Props> {
         if (this.state.showImage) {
             return (
                 <Image
-                  style={{width: 500, height: 500}}
+                  resizeMode="contain"
+                  style={styles.originalimage}
                   source={{uri: 'http://lorempixel.com/500/500'+'?random_number=' +new Date().getTime()}}
                 />
             );
@@ -91,6 +94,17 @@ export default class App extends Component<Props> {
                   strokeColor={'black'}
                   strokeWidth={4}
                 />
+                <View style={{position: 'absolute', right: 0}}>
+                    <Button title={' Clear '} style={{}}onPress={() => { this.canvas.clear(); }}/>
+                </View>
+                <View style={{position: 'absolute', left: 0}}>
+                    <Button title={' Save '} onPress={() => {
+                        console.log(this.canvas.getPaths());
+                        this.canvas.getBase64('png', false, true, true, true, (err, result) => {
+                            console.log(result)
+                        })
+                    }}/>
+                </View>
               </View>
             );
         } else {
@@ -146,16 +160,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  originalimage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

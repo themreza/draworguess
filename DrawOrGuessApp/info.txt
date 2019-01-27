@@ -1,0 +1,5 @@
+# Run app:
+react-native run-android
+
+# Chrome Inspector (shake device and select Remote Debugging):
+http://localhost:8081/debugger-ui/
