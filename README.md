@@ -4,7 +4,7 @@ The collected data could be used to study the visual perception of images by the
 
 ## Game Modes
 * Draw:
-  - You have 3 second to look at a random image like a photograph, painting, graphic art, etc.
+  - You have 3 seconds to look at a random image like a photograph, painting, graphic art, etc.
   - Then you'll be given a blank canvas and have 20 seconds to draw what you saw as best as you can.
   - Your drawing will be automatically submitted when your time is up!
   - Others will try to guess what you drew and rate your drawing.
