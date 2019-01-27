@@ -154,7 +154,7 @@ export default class App extends Component<Props> {
   _renderReadySetGo(){
         if (this.state.showReadySetGo) {
             return (
-              <Text style={{fontSize: 30, textAlign: 'center'}}>You have 3 second to look at this image!</Text>
+              <Text style={{fontSize: 30, textAlign: 'center'}}>You have 3 seconds to look at this image!</Text>
             );
         } else {
             return null;
